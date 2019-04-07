@@ -20,6 +20,7 @@ public class Corvet  extends Ship{
     @Override
     public void draw(SpriteBatch batch) {
         this.x = getX();
+        int i;
         this.y =getY();
         super.draw(batch);
         control.handle();

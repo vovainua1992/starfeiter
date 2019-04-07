@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         batch = new SpriteBatch();
-        texture = new Texture(Gdx.files.internal("1.psd"));
+        texture = new Texture(Gdx.files.internal("Ship.png"));
         textureAsteroid = new Texture(Gdx.files.internal("asteroid.psd"));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         corvet = new Corvet(texture,0,-5,4f,4f);
