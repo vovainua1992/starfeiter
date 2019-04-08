@@ -17,4 +17,5 @@ public class AsteroidControl {
         boundAsteroid.setPosition(boundAsteroid.getX(),
                 boundAsteroid.getY() - speed * GameScreen.deltaCF);
     }
+
 }
