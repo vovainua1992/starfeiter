@@ -32,8 +32,6 @@ public abstract class GameObject {
     bounds = new Polygon(new float[]{0f,0f,width,0f,width,heigth,0f,heigth});
     bounds.setPosition(x, y);
     bounds.setOrigin(width/2f,heigth/2f);
-     System.out.println(x);
-     System.out.println(bounds.getX());
  }
 
  public void draw(SpriteBatch batch){
@@ -42,9 +40,9 @@ public abstract class GameObject {
      object.draw(batch);
  }
 
- public boolean contact(Vector2 point){
-     return bounds.contains(point);
- }
+public float[] getVertices(){
+     return bounds.getTransformedVertices();
+}
 
     public Polygon getBounds() {
         return bounds;

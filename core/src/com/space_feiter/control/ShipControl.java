@@ -12,16 +12,12 @@ public class ShipControl {
     private Polygon shipBounds;
     private float speed = 1f,minX =-Gdx.graphics.getWidth()/150,maxX = Gdx.graphics.getWidth()/150;
     Mesenges mesenges = new Mesenges();
-    float[] vertices;
-    Vector2[] pointsVertices=new Vector2[5];
+       Vector2[] pointsVertices=new Vector2[5];
 
 
     public ShipControl(Polygon shipBounds){
-
         this.shipBounds = shipBounds;
-        vertices = shipBounds.getTransformedVertices();
-
-    }
+          }
 
     public void handle(){
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
@@ -39,39 +35,19 @@ public class ShipControl {
 
 
     private boolean contactToAsteroid(){
-        pointsVertices[0] = new Vector2(vertices[0],vertices[1]);
-        pointsVertices[1] = new Vector2(vertices[2],vertices[3]);
-        pointsVertices[2] = new Vector2(vertices[4],vertices[5]);
-        pointsVertices[3] = new Vector2(vertices[6],vertices[7]);
-        pointsVertices[4] = new Vector2(shipBounds.getX(),shipBounds.getY());
-        boolean res = false;
         for (int i = AsteroidGreater.asteroids.size();i>0;i--){
-            if ( AsteroidGreater.asteroids.get(i-1).contact(pointsVertices[0])){
-                AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
-                return true;
-            }else
-                if ( AsteroidGreater.asteroids.get(i-1).contact(pointsVertices[1])){
-                    AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
+            float[] vertices = AsteroidGreater.asteroids.get(i-1).getVertices();
+            for(int k =vertices.length;k>0;k-=2){
+                if (contactToShip(vertices[k-2],vertices[k-1])){
                     return true;
-                }else
-                     if ( AsteroidGreater.asteroids.get(i-1).contact(pointsVertices[2])){
-                         AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
-                        return true;
-                    }else
-                        if ( AsteroidGreater.asteroids.get(i-1).contact(pointsVertices[3])){
-                            AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
-                            return true;
-                        }else
-                        if ( AsteroidGreater.asteroids.get(i-1).contact(pointsVertices[4])){
-                            AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
-                            return true;
-                        }
-
+                }
+            }
         }
+        return false;
+    }
 
-
-        return res;
-
+    boolean contactToShip(float posx,float posy){
+        return shipBounds.contains(posx,posy);
     }
 
     private void dowmSpeed() {
