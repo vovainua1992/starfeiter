@@ -24,13 +24,7 @@ public class Asteroid extends GameObject{
             AsteroidControl.handle();
         }
         else AsteroidGreater.asteroidsOld.add(this);
-        distanceToShip = (float) Math.sqrt( ( (Corvet.x -getX())*(Corvet.x -getX())+((Corvet.y - getY())*(Corvet.y - getY() ) ) ) ) ;
-        if (distanceToShip<1.2f){
-            Mesenges.setPermissionMesenge("Game Ower ",60,Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-         //   System.out.println(Corvet.x+" "+Corvet.y);
-          //  System.out.println(getX()+" "+ getY());
-            AsteroidGreater.asteroidsOld.add(this);
-        }
+
     }
 
 

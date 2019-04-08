@@ -41,7 +41,7 @@ public class GameScreen implements Screen {
         texture = new Texture(Gdx.files.internal("Ship.png"));
         textureAsteroid = new Texture(Gdx.files.internal("asteroid.psd"));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        corvet = new Corvet(texture,0,-5,4f,4f);
+        corvet = new Corvet(texture,0,-4,2f,2f);
         asteroid = new Asteroid(textureAsteroid,0,+5,1f,1f);
         asteroidGreater = new AsteroidGreater();
         frameRate = new FrameRate();
