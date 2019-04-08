@@ -27,7 +27,7 @@ public class AsteroidGreater {
 
     public void greateAsteroid(){
 
-        i++;
+        i++ ;
         if (i >asteroidTime){
         float x;
         if(r.nextBoolean())
