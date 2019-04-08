@@ -1,5 +1,6 @@
 package com.space_feiter.util;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -17,6 +18,17 @@ public class MyJSonParseToPolygon {
     public boolean parseJson(String myJson) {
         if (myJson != null) {
             JsonValue map = new JsonReader().parse(myJson);
+            JsonValue bodyElem = map.getChild("rigidBodies");
+            polygon = new Polygon(parseVertices(bodyElem));
+            return true;
+        }else
+            return false;
+
+    }
+
+    public boolean parseJson(FileHandle myJson) {
+        if (myJson != null) {
+            JsonValue map = new JsonReader().parse(myJson.readString());
             JsonValue bodyElem = map.getChild("rigidBodies");
             polygon = new Polygon(parseVertices(bodyElem));
             return true;
