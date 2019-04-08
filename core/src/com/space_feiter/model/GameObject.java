@@ -11,6 +11,16 @@ public abstract class GameObject {
  Polygon bounds;
  Sprite object;
 
+ public GameObject(Texture texture,Polygon polygon,float x, float y,float width,float heigth){
+     object = new Sprite(texture);
+     object.setSize(width,heigth);
+     object.setOrigin(width/2f,heigth/2f);
+
+     bounds = polygon;
+     bounds.setPosition(x, y);
+     bounds.setOrigin(width/2f,heigth/2f);
+ }
+
 
  public GameObject(Texture texture,float x, float y, float width, float heigth){
     object = new Sprite(texture);

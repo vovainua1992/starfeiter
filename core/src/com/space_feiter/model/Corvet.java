@@ -2,6 +2,7 @@ package com.space_feiter.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Polygon;
 import com.space_feiter.control.ShipControl;
 
 public class Corvet  extends Ship{
@@ -12,6 +13,12 @@ public class Corvet  extends Ship{
 
     public Corvet(Texture texture, float x, float y, float width, float heigth) {
         super(texture, x, y, width, heigth);
+        this.x = x;
+        this.y = y;
+        control = new ShipControl(bounds);
+    }
+    public Corvet(Texture texture, Polygon polygon, float x, float y, float width,float heigth){
+        super(texture,polygon,x,y,width,heigth);
         this.x = x;
         this.y = y;
         control = new ShipControl(bounds);
