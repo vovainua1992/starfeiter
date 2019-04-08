@@ -8,7 +8,7 @@ import com.space_feiter.viev.GameScreen;
 public class Main extends Game {
     private Screen gameScreen;
 
-//testing98o
+//testing98рп
 
     @Override
     public void create() {
