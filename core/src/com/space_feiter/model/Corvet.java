@@ -11,27 +11,34 @@ public class Corvet  extends Ship{
     public static float y;
 
 
+
     public Corvet(Texture texture, float x, float y, float width, float heigth) {
         super(texture, x, y, width, heigth);
         this.x = x;
         this.y = y;
-        control = new ShipControl(bounds);
+
+        control = new ShipControl(bounds,this);
+
     }
-    public Corvet(Texture texture, Polygon polygon, float x, float y, float width,float heigth){
-        super(texture,polygon,x,y,width,heigth);
+    public Corvet(Texture texture, float[] polygon, float x, float y, float width,float heigth){
+        super(texture,new Polygon(polygon),x,y,width,heigth);
         this.x = x;
         this.y = y;
-        control = new ShipControl(bounds);
+
+        control = new ShipControl(bounds,this);
     }
 
     @Override
     public void draw(SpriteBatch batch) {
         this.x = getX();
-        int i;
         this.y =getY();
         super.draw(batch);
         control.handle();
     }
 
+
+    public void dispose(){
+
+    }
 
 }

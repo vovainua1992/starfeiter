@@ -1,18 +1,20 @@
 package com.space_feiter.model;
 
-import com.space_feiter.control.HandleMessenge;
+import com.badlogic.gdx.graphics.Color;
+import com.space_feiter.control.handle.HandleMessenge;
 
-public class Mess {
+public class Messeng {
     String mess;
     float x;
     float y;
     public boolean need;
-    public int frameNumsLive;
+    public float timeAlive;
+    Color color;
 
 
     HandleMessenge handl;
 
-    public Mess(String mess, HandleMessenge handl , float x, float y){
+    public Messeng(String mess, HandleMessenge handl , float x, float y){
         this.mess = mess;
         this.x = x;
         this.y = y;
@@ -20,12 +22,12 @@ public class Mess {
         need = true;
     }
 
-    public Mess(String mess,int frameNumsLive, HandleMessenge handl , float x, float y){
+    public Messeng(String mess, float timeAlive, HandleMessenge handl , float x, float y){
         this.mess = mess;
         this.x = x;
         this.y = y;
         this.handl = handl;
-        this.frameNumsLive = frameNumsLive;
+        this.timeAlive = timeAlive;
         need = true;
     }
 

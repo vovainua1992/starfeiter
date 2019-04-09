@@ -8,21 +8,20 @@ import com.badlogic.gdx.utils.JsonValue;
 
 
 public class MyJSonParseToPolygon {
-    Polygon polygon;
+    float[] vertices;
 
 
-    public Polygon getPolygon() {
-        return polygon;
+    public float[] getPolygon() {
+        return vertices;
     }
 
-    public boolean parseJson(String myJson) {
+    public static float[] parseJsonToVertices(FileHandle myJson) {
         if (myJson != null) {
-            JsonValue map = new JsonReader().parse(myJson);
+            JsonValue map = new JsonReader().parse(myJson.readString());
             JsonValue bodyElem = map.getChild("rigidBodies");
-            polygon = new Polygon(parseVertices(bodyElem));
-            return true;
+            return parseVertices(bodyElem);
         }else
-            return false;
+            return null;
 
     }
 
@@ -30,14 +29,14 @@ public class MyJSonParseToPolygon {
         if (myJson != null) {
             JsonValue map = new JsonReader().parse(myJson.readString());
             JsonValue bodyElem = map.getChild("rigidBodies");
-            polygon = new Polygon(parseVertices(bodyElem));
+            vertices = parseVertices(bodyElem);
             return true;
         }else
             return false;
 
     }
 
-    private float[] parseVertices(JsonValue bodyElem) {
+    private static float[] parseVertices(JsonValue bodyElem) {
             float[] res=null;
         JsonValue polygonsElem = bodyElem.getChild("shapes");
 
@@ -46,6 +45,7 @@ public class MyJSonParseToPolygon {
         for (; vertices != null; vertices = vertices.next()) {
                       j+=2;
         }
+            vertices = polygonsElem.getChild("vertices");
         System.out.println(j);
         res = new float[j];
         for (int i =0; vertices != null; vertices = vertices.next()) {
@@ -56,6 +56,7 @@ public class MyJSonParseToPolygon {
                 i+=2;
 
         }
+        System.out.println(res[2]+res[3]);
         return res;
     }
 }

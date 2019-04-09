@@ -12,11 +12,15 @@ public class Asteroid extends GameObject{
     AsteroidControl AsteroidControl;
     private float distanceToShip;
 
-    public Asteroid(Texture texture, Polygon polygon, float x, float y, float width, float heigth) {
-        super(texture,polygon, x, y, width, heigth);
+    public Asteroid(Texture texture, float[] polygon, float x, float y, float width, float heigth) {
+        super(texture,new Polygon(polygon), x, y, width, heigth);
         AsteroidControl = new AsteroidControl(bounds);
     }
 
+    public Asteroid(Texture texture, float x, float y, float width, float heigth) {
+        super(texture, x, y, width, heigth);
+        AsteroidControl = new AsteroidControl(bounds);
+    }
 
     @Override
     public void draw(SpriteBatch batch) {
