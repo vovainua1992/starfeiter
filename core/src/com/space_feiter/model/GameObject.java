@@ -29,7 +29,7 @@ public abstract class GameObject {
     object.setOrigin(width/2f,heigth/2f);
 
     bounds = new Polygon(new float[]{0f,0f,width,0f,width,heigth,0f,heigth});
-    bounds.setPosition(x, y);
+    bounds.setPosition(x+2f, y+2f);
     bounds.setOrigin(width/2f,heigth/2f);
  }
 
@@ -42,9 +42,10 @@ public abstract class GameObject {
     public void setScale(float x,float y){
      bounds.setScale(x,y);
     }
-public float[] getVertices(){
-     return bounds.getTransformedVertices();
-}
+
+    public float[] getVertices(){
+         return bounds.getTransformedVertices();
+    }
 
     public Polygon getBounds() {
         return bounds;
@@ -56,6 +57,10 @@ public float[] getVertices(){
 
     public float getY(){
         return bounds.getY();
+    }
+
+    public float getSceleWidth(){
+        return object.getWidth();
     }
 }
 

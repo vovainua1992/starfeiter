@@ -7,7 +7,7 @@ import com.space_feiter.viev.GameScreen;
 
 public class AsteroidControl {
     private Polygon boundAsteroid;
-    private float speed = 5f, minY = -Gdx.graphics.getHeight() / 100;
+    float minY = -Gdx.graphics.getHeight() / 100;
 
     public AsteroidControl(Polygon boundAsteroid) {
         this.boundAsteroid = boundAsteroid;
@@ -15,7 +15,7 @@ public class AsteroidControl {
 
     public void handle() {
         boundAsteroid.setPosition(boundAsteroid.getX(),
-                boundAsteroid.getY() - speed * GameScreen.deltaCF);
+                boundAsteroid.getY() - HandlerStatOfGame.speedAsteroid * GameScreen.deltaCF);
     }
 
 }

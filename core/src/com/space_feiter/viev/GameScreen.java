@@ -15,7 +15,7 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private OrthographicCamera camera ;
 
-    public static float deltaCF;
+    public static float deltaCF, widthViev;
     private FrameRate frameRate;
     HandlerStatOfGame handlerStats;
 
@@ -55,7 +55,8 @@ public class GameScreen implements Screen {
         float aspectRatio = (float) height/width;
         camera = new OrthographicCamera(20f,20f*aspectRatio);
         camera.zoom = handlerStats.zoom;
-        camera.position.set(new Vector3(2f,2f,10f));
+
+        camera.position.set(new Vector3(0f,0f,10f));
         camera.update();
     }
 

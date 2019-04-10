@@ -46,7 +46,7 @@ public class MyJSonParseToPolygon {
                       j+=2;
         }
             vertices = polygonsElem.getChild("vertices");
-        System.out.println(j);
+      //  System.out.println(j);
         res = new float[j];
         for (int i =0; vertices != null; vertices = vertices.next()) {
                 float x = vertices.getFloat("x");
@@ -56,7 +56,7 @@ public class MyJSonParseToPolygon {
                 i+=2;
 
         }
-        System.out.println(res[2]+res[3]);
+       // System.out.println(res[2]+res[3]);
         return res;
     }
 }

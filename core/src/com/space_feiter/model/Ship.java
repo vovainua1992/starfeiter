@@ -20,19 +20,7 @@ public abstract class Ship extends GameObject {
         alpha = object.getColor().a;
     }
 
-    public void destroy(){
-        float width = object.getWidth();
-        float heigth = object.getHeight();
-        float posX = bounds.getX();
-        float posY = bounds.getY();
-        object = new Sprite(new Texture(Gdx.files.internal("bom.png")));
-        object.setSize(width,heigth);
-        object.setOrigin(width/2f,heigth/2f);
-
-        bounds = new Polygon(MyJSonParseToPolygon.parseJsonToVertices(Gdx.files.internal("bom")));
-        bounds.setPosition(posX, posY);
-        bounds.setOrigin(width/2f,heigth/2f);
-    }
+    public abstract void destroy();
 
 
 

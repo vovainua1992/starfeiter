@@ -10,16 +10,19 @@ import com.badlogic.gdx.math.Intersector;
 
 public class ShipControl {
     private Polygon shipBounds;
-    private float speed = 0f,minX =-(float) Gdx.graphics.getBackBufferWidth()/150,maxX = (float) Gdx.graphics.getBackBufferWidth()/150;
+    private float speed = 0f,minX =-10f,maxX = 8.5f;
     MessengeMeneger messengeMeneger = new MessengeMeneger();
     Corvet corvet;
     private boolean needed = true;
+    private boolean vulnerability = true;
+    private float rebootWeaponTime;
        Vector2[] pointsVertices=new Vector2[5];
 
 
     public ShipControl(Polygon shipBounds, Corvet corvet){
         this.shipBounds = shipBounds;
         this.corvet = corvet;
+        rebootWeaponTime = 0f;
           }
 
     public void handle(){
@@ -31,16 +34,36 @@ public class ShipControl {
                 speed+=0.1f;
             }else
                 dowmSpeed();
+            if (vulnerability){
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+                if (!(rebootWeaponTime>0)){
+                    shot();
+                }
+
             if (contactToAsteroid()){
-                System.out.println("Asteroid conect to ship");
+            //    System.out.println("Asteroid conect to ship");
+                HandlerStatOfGame.reductionLife();
+                HandlerStatOfGame.corvetItsLife = false;
                 corvet.destroy();
                 needed = false;
 
             }
+            }else corvet.invulnerability(corvet.timeInv);{
+
+            }
+            rebootWeaponTime-=GameScreen.deltaCF;
             shipBounds.setPosition(LimitedX(shipBounds.getX()+speed*GameScreen.deltaCF),shipBounds.getY());
         }
     }
 
+    public void setVulnerability (boolean b){
+        vulnerability = b;
+    }
+
+    public void setNewShip(boolean b,Polygon shipBounds){
+        this.shipBounds = shipBounds;
+        needed = b;
+    }
 
     private boolean contactToAsteroid(){
 
@@ -50,6 +73,11 @@ public class ShipControl {
 
         }
         return false;
+    }
+
+    private void shot(){
+        HandlerStatOfGame.addBulet();
+        rebootWeaponTime = HandlerStatOfGame.timeRebootWeapon;
     }
 
     private void dowmSpeed() {
