@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.space_feiter.control.handle.HandleSound;
 import com.space_feiter.model.Corvet;
 import com.space_feiter.viev.GameScreen;
 import com.badlogic.gdx.math.Intersector;
@@ -76,6 +77,7 @@ public class ShipControl {
     }
 
     private void shot(){
+        HandleSound.piu.play(0.3f);
         HandlerStatOfGame.addBulet();
         rebootWeaponTime = HandlerStatOfGame.timeRebootWeapon;
     }

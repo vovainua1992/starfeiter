@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 import com.space_feiter.control.AsteroidGreater;
 import com.space_feiter.control.HandlerStatOfGame;
+import com.space_feiter.control.handle.HandleSound;
 import com.space_feiter.viev.GameScreen;
 
 public class Bulet extends GameObject {
@@ -37,6 +38,7 @@ public class Bulet extends GameObject {
             AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
             need = false;
             HandlerStatOfGame.score+=100;
+            HandleSound.boom.play(0.3f);
             }
         }
     }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.space_feiter.control.handle.HandleLifePlayer;
+import com.space_feiter.control.handle.HandleSound;
 import com.space_feiter.model.Bulet;
 import com.space_feiter.model.Corvet;
 import com.space_feiter.model.GameObject;
@@ -28,7 +29,7 @@ public class HandlerStatOfGame {
     private static HandleLifePlayer handlerLife;
     private static ArrayList<Bulet> bulets = new ArrayList<Bulet>();
     private static ArrayList<Bulet> freeBulets = new ArrayList<Bulet>();
-
+    private HandleSound handleSound = new HandleSound();
 
     Texture shipTexture;
     Texture boomTextore;
@@ -53,6 +54,7 @@ public class HandlerStatOfGame {
     float lastTimeAsteroid;
     float timeRestart=0f;
     float timeInv;
+    private float timePresQ= 0f;
 
     //Game constant variable
     float widthShip = 1.5f;
@@ -66,6 +68,7 @@ public class HandlerStatOfGame {
     private int startLife = 3;
     private int maxLife = 3;
     private static int numsBuletGreated;
+    private float lockBottonTime = 0.5f;
 
 
     public void startGame(GameScreen gameScreen){
@@ -149,11 +152,15 @@ public class HandlerStatOfGame {
 
     private void drawBulet(SpriteBatch batch){
         if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            System.out.println(numsBuletGreated);
             speedBulet = 10f;
         }
+        timePresQ-=GameScreen.deltaCF;
+        if (timePresQ<0){
+        if (Gdx.input.isKeyPressed(Input.Keys.Q)){
+            handleSound.nextTrack();
+            timePresQ = lockBottonTime;
+        }}
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            System.out.println(numsBuletGreated);
             speedBulet = 0.1f;
         }
         for (int i = bulets.size();i>0;i--){
@@ -166,6 +173,7 @@ public class HandlerStatOfGame {
     }
 
     public void handleAll(float deltaTime, SpriteBatch batch){
+        handleSound.handle();
         timeNextAsteroid=timeNextAsteroid-deltaTime;
         if (timeNextAsteroid<0){
         asteroidGreater.greateAsteroid();
