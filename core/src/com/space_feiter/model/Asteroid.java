@@ -12,9 +12,7 @@ public class Asteroid extends GameObject{
     AsteroidControl AsteroidControl;
     private float distanceToShip;
 
-    public Asteroid(){
-        super();
-    }
+
     public Asteroid(Texture texture, float[] polygon, float x, float y, float width, float heigth) {
         super(texture,new Polygon(polygon), x, y, width, heigth);
         AsteroidControl = new AsteroidControl(bounds);

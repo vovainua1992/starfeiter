@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.space_feiter.control.HandlerStatOfGame;
 import com.space_feiter.control.MessengeMeneger;
+import com.space_feiter.control.handle.BackgroundHandle;
 import com.space_feiter.model.GameObject;
 
 
@@ -15,19 +16,18 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private OrthographicCamera camera ;
 
-    public static float deltaCF, widthViev;
+    public static float deltaCF;
     private FrameRate frameRate;
     HandlerStatOfGame handlerStats;
-
-    private GameObject[] actors = new GameObject[2];
-
-
+    BackgroundHandle backgroundHandle;
     @Override
     public void show() {
         handlerStats = new HandlerStatOfGame();
         handlerStats.startGame(this);
         batch = new SpriteBatch();
         frameRate = new FrameRate();
+        backgroundHandle =new BackgroundHandle();
+
     }
 
     @Override
@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
         frameRate.update();
         frameRate.render();
 
+        backgroundHandle.draw();
         MessengeMeneger.render();
 
         batch.begin();
