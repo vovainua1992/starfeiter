@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
+import com.space_feiter.control.Pool.BuletPool;
 import com.space_feiter.control.handle.HandleLifePlayer;
 import com.space_feiter.control.handle.HandleSound;
 import com.space_feiter.model.Bulet;
@@ -27,8 +29,8 @@ public class HandlerStatOfGame {
     private AsteroidGreater asteroidGreater;
     private MessengeMeneger messengeMeneger;
     private static HandleLifePlayer handlerLife;
-    private static ArrayList<Bulet> bulets = new ArrayList<Bulet>();
-    private static ArrayList<Bulet> freeBulets = new ArrayList<Bulet>();
+    private static Array<Bulet> bulets;
+
     private HandleSound handleSound = new HandleSound();
 
     Texture shipTexture;
@@ -37,6 +39,7 @@ public class HandlerStatOfGame {
     public static Texture buletTexture;
     private Texture gameOverTexture;
     private StaticObject gameOver;
+    private static BuletPool buletPool ;
 
 
 
@@ -47,8 +50,8 @@ public class HandlerStatOfGame {
     public static float correlationShip;
     float correlationBom;
     float correlationAsteroid;
-    private static float correlationBulet;
-
+    public static float correlationBulet;
+    private Array<Bulet> buletsOld;
 
     float timeNextAsteroid;
     float lastTimeAsteroid;
@@ -75,6 +78,9 @@ public class HandlerStatOfGame {
             this.gameScreen = gameScreen;
             lifePlayer = startLife;
             timeRestart = timeRestartShip;
+            buletPool = new BuletPool();
+            bulets = new Array<Bulet>();
+            buletsOld = new Array<Bulet>();
 
             verticesShip = MyJSonParseToPolygon.parseJsonToVertices(Gdx.files.internal("test"));
             verticesBom =MyJSonParseToPolygon.parseJsonToVertices(Gdx.files.internal("bom"));
@@ -114,28 +120,14 @@ public class HandlerStatOfGame {
     }
 
     public static void addBulet(){
-        if(freeBulets.size()>0){
-            if (rightBulet){
-                freeBulets.get(0).reFire( corvetPlayer.getX()+1.1f,corvetPlayer.getY()+1.5f);
-                bulets.add(freeBulets.get(0));
-                freeBulets.remove(0);
-                rightBulet = false;}
-            else {
-                freeBulets.get(0).reFire( corvetPlayer.getX()+0.3f,corvetPlayer.getY()+1.5f);
-                bulets.add(freeBulets.get(0));
-                freeBulets.remove(0);
-                rightBulet = true;
-            }
-        }else {
-            numsBuletGreated++;
         if (rightBulet){
-        bulets.add(new Bulet(buletTexture, corvetPlayer.getX()-0.9f,corvetPlayer.getY()-0.5f,0.1f,0.1f/correlationBulet));
+        bulets.add(buletPool.getBulet(corvetPlayer.getX()+1.05f,corvetPlayer.getY()+1.5f));
         rightBulet = false;}
         else {
-        bulets.add(new Bulet(buletTexture, corvetPlayer.getX()-1.7f,corvetPlayer.getY()-0.5f,0.1f,0.1f/correlationBulet));
+        bulets.add(buletPool.getBulet(corvetPlayer.getX()+0.35f,corvetPlayer.getY()+1.5f));
         rightBulet = true;
         }
-        }
+
     }
 
     public static void reductionLife(){
@@ -163,13 +155,14 @@ public class HandlerStatOfGame {
         if (Gdx.input.isKeyPressed(Input.Keys.A)){
             speedBulet = 0.1f;
         }
-        for (int i = bulets.size();i>0;i--){
+        for (int i = bulets.size;i>0;i--){
             bulets.get(i-1).draw(batch);
+           // System.out.println(bulets.get(i-1).need);
             if(!bulets.get(i-1).need){
-                freeBulets.add(bulets.get(i-1));
-                bulets.remove(i-1);
-            }
+                buletPool.free(bulets.get(i-1));
+                buletsOld.add(bulets.get(i-1));}
         }
+        bulets.removeAll(buletsOld,true);
     }
 
     public void handleAll(float deltaTime, SpriteBatch batch){

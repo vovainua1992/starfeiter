@@ -1,16 +1,11 @@
 package com.space_feiter.control;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Pool;
-import com.space_feiter.control.handle.AsteroidPool;
+import com.space_feiter.control.Pool.AsteroidPool;
 import com.space_feiter.model.Asteroid;
-import com.space_feiter.util.MyJSonParseToPolygon;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class AsteroidGreater {
@@ -25,7 +20,7 @@ public class AsteroidGreater {
 
     public AsteroidGreater(Texture texture,float[] verticesAsteroid){
         this.textureAsteroids = texture;
-        pool = new AsteroidPool(30,120);
+        pool = new AsteroidPool(30,180);
     }
 
     public void greateAsteroid(){

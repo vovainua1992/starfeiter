@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new Main(), config);
 		config.vSyncEnabled = false; // Setting to false disables vertical sync
-		config.foregroundFPS = 0; // Setting to 0 disables foreground fps throttling
+		config.foregroundFPS = 120; // Setting to 0 disables foreground fps throttling
 		//config.backgroundFPS = 0;
 
 		config.width = 1200;

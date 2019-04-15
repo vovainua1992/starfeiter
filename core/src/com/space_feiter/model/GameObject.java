@@ -12,8 +12,6 @@ public abstract class GameObject {
  Sprite object;
 
 
- public GameObject(){}
-
  public GameObject(Texture texture,Polygon polygon,float x, float y,float width,float heigth){
      object = new Sprite(texture);
      object.setSize(width,heigth);

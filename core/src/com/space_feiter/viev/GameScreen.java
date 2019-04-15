@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
         float aspectRatio = (float) height/width;
         camera = new OrthographicCamera(20f,20f*aspectRatio);
         camera.zoom = handlerStats.zoom;
-
+        frameRate.resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.position.set(new Vector3(0f,0f,10f));
         camera.update();
     }

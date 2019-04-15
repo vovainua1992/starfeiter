@@ -20,7 +20,7 @@ public class HandleLifePlayer {
         for (int i = 0;i<maxLife;i++){
             startPosX =startPosX+1f;
             //System.out.println(Gdx.graphics.getHeight());
-            float y = (float) 3.8f -(float) Gdx.graphics.getHeight()/1000;
+            float y = (float) 3f;
             //System.out.println(y);
             Life life = new Life(shipTexture,startPosX, y,1f,1f/ HandlerStatOfGame.correlationShip);
             lifes.add(life);
