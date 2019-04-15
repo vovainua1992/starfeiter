@@ -12,6 +12,8 @@ public abstract class GameObject {
  Sprite object;
 
 
+ public GameObject(){}
+
  public GameObject(Texture texture,Polygon polygon,float x, float y,float width,float heigth){
      object = new Sprite(texture);
      object.setSize(width,heigth);
@@ -33,6 +35,7 @@ public abstract class GameObject {
     bounds.setOrigin(width/2f,heigth/2f);
  }
 
+
  public void draw(SpriteBatch batch){
      object.setPosition(bounds.getX(),bounds.getY());
      object.setRotation(bounds.getRotation());
@@ -41,6 +44,10 @@ public abstract class GameObject {
 
     public void setScale(float x,float y){
      bounds.setScale(x,y);
+    }
+
+    public void setPosition(float x,float y){
+        bounds.setPosition(x,y);
     }
 
     public float[] getVertices(){

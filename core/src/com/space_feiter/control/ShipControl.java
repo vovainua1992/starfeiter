@@ -12,12 +12,11 @@ import com.badlogic.gdx.math.Intersector;
 public class ShipControl {
     private Polygon shipBounds;
     private float speed = 0f,minX =-10f,maxX = 8.5f;
-    MessengeMeneger messengeMeneger = new MessengeMeneger();
     Corvet corvet;
     private boolean needed = true;
     private boolean vulnerability = true;
     private float rebootWeaponTime;
-       Vector2[] pointsVertices=new Vector2[5];
+   int numContact;
 
 
     public ShipControl(Polygon shipBounds, Corvet corvet){
@@ -67,9 +66,9 @@ public class ShipControl {
     }
 
     private boolean contactToAsteroid(){
-
-        for (int i = AsteroidGreater.asteroids.size();i>0;i--){
+        for (int i = AsteroidGreater.asteroids.size;i>0;i--){
             if (Intersector.overlapConvexPolygons(shipBounds,AsteroidGreater.asteroids.get(i-1).getBounds())){
+            numContact = i-1;
            return true;}
 
         }

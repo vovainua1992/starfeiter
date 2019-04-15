@@ -13,6 +13,7 @@ public class Bulet extends GameObject {
     private float maxY =6.7f;
     private float speed;
     public boolean need = true;
+    private int numContact=-1;
 
     public Bulet(Texture texture, float x, float y, float width, float heigth) {
         super(texture, x, y, width, heigth);
@@ -33,14 +34,18 @@ public class Bulet extends GameObject {
     }
 
     private void itsContactEnemy(){
-        for (int i=AsteroidGreater.asteroids.size();i>0;i--){
+        for (int i=AsteroidGreater.asteroids.size;i>0;i--){
           if(Intersector.overlapConvexPolygons(AsteroidGreater.asteroids.get(i-1).bounds,bounds)){
-            AsteroidGreater.asteroidsOld.add(AsteroidGreater.asteroids.get(i-1));
-            need = false;
-            HandlerStatOfGame.score+=100;
-            HandleSound.boom.play(0.3f);
+              AsteroidGreater.pool.free(AsteroidGreater.asteroids.get(i-1));
+              numContact = i-1;
+                need = false;
+                HandlerStatOfGame.score+=100;
+                HandleSound.boom.play(0.3f);
             }
         }
+        if (numContact!=-1){
+        AsteroidGreater.asteroids.removeIndex(numContact);
+        numContact=-1;}
     }
 
     private void handle(){

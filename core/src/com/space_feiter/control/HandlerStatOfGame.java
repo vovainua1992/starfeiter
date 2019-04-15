@@ -33,7 +33,7 @@ public class HandlerStatOfGame {
 
     Texture shipTexture;
     Texture boomTextore;
-    Texture asteroidTexture;
+    public static Texture asteroidTexture;
     public static Texture buletTexture;
     private Texture gameOverTexture;
     private StaticObject gameOver;

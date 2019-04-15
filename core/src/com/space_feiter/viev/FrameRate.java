@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 public class FrameRate implements Disposable {
     long lastTimeCounted;
     private float sinceChange;
-    private float frameRate;
+    private static float frameRate;
     private BitmapFont font;
     private SpriteBatch batch;
     private OrthographicCamera cam;
@@ -30,6 +30,7 @@ public class FrameRate implements Disposable {
         cam.translate(screenWidth / 2, screenHeight / 2);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
+
     }
 
     public void update() {
@@ -40,12 +41,14 @@ public class FrameRate implements Disposable {
         if(sinceChange >= 1000) {
             sinceChange = 0;
             frameRate = Gdx.graphics.getFramesPerSecond();
+            System.out.println(frameRate);
         }
     }
 
     public void render() {
+        System.out.println(frameRate);
         batch.begin();
-        font.draw(batch, (int)frameRate + " fps", 3, Gdx.graphics.getHeight() - 3);
+        font.draw(batch, frameRate + " fps", 10, Gdx.graphics.getHeight() - 3);
         batch.end();
     }
 

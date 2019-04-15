@@ -12,6 +12,9 @@ public class Asteroid extends GameObject{
     AsteroidControl AsteroidControl;
     private float distanceToShip;
 
+    public Asteroid(){
+        super();
+    }
     public Asteroid(Texture texture, float[] polygon, float x, float y, float width, float heigth) {
         super(texture,new Polygon(polygon), x, y, width, heigth);
         AsteroidControl = new AsteroidControl(bounds);
@@ -22,13 +25,15 @@ public class Asteroid extends GameObject{
         AsteroidControl = new AsteroidControl(bounds);
     }
 
+
+
     @Override
     public void draw(SpriteBatch batch) {
         if (getY()>-15f) {
             super.draw(batch);
             AsteroidControl.handle();
         }
-        else AsteroidGreater.asteroidsOld.add(this);
+        else AsteroidGreater.asteroids.removeValue(this,false);
 
     }
 
