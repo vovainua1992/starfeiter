@@ -40,6 +40,7 @@ public class HandlerStatOfGame {
     private Texture gameOverTexture;
     private StaticObject gameOver;
     private static BuletPool buletPool ;
+    public static boolean contolLeft,controlRicht,controlFire,controlNextSound,controlBackSound,controlLopingSound;
 
 
 
@@ -78,7 +79,7 @@ public class HandlerStatOfGame {
             this.gameScreen = gameScreen;
             lifePlayer = startLife;
             timeRestart = timeRestartShip;
-            buletPool = new BuletPool();
+            buletPool = new BuletPool(50,50);
             bulets = new Array<Bulet>();
             buletsOld = new Array<Bulet>();
 
@@ -143,26 +144,14 @@ public class HandlerStatOfGame {
     }
 
     private void drawBulet(SpriteBatch batch){
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            speedBulet = 10f;
-        }
-        timePresQ-=GameScreen.deltaCF;
-        if (timePresQ<0){
-        if (Gdx.input.isKeyPressed(Input.Keys.Q)){
-            handleSound.nextTrack();
-            timePresQ = lockBottonTime;
-        }}
-        if (Gdx.input.isKeyPressed(Input.Keys.A)){
-            speedBulet = 0.1f;
-        }
         for (int i = bulets.size;i>0;i--){
             bulets.get(i-1).draw(batch);
            // System.out.println(bulets.get(i-1).need);
             if(!bulets.get(i-1).need){
                 buletPool.free(bulets.get(i-1));
-                buletsOld.add(bulets.get(i-1));}
+                bulets.removeIndex(i-1);}
         }
-        bulets.removeAll(buletsOld,true);
+       //  bulets.removeAll(buletsOld,true);
     }
 
     public void handleAll(float deltaTime, SpriteBatch batch){

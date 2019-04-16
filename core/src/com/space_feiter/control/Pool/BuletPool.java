@@ -5,6 +5,10 @@ import com.space_feiter.control.HandlerStatOfGame;
 import com.space_feiter.model.Bulet;
 
 public class BuletPool extends Pool<Bulet> {
+    public BuletPool(int i, int i1) {
+        super(i,i1);
+    }
+
     @Override
     protected Bulet newObject() {
         return new Bulet(HandlerStatOfGame.buletTexture,0f,0f,0.1f,0.1f);

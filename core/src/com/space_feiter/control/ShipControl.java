@@ -27,15 +27,15 @@ public class ShipControl {
 
     public void handle(){
         if (needed){
-            if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            if (HandlerStatOfGame.contolLeft){
                 speed-=0.1f;
             }else
-            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            if(HandlerStatOfGame.controlRicht){
                 speed+=0.1f;
             }else
                 dowmSpeed();
             if (vulnerability){
-                if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
+                if (HandlerStatOfGame.controlFire)
                 if (!(rebootWeaponTime>0)){
                     shot();
                 }

@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Polygon;
 import com.space_feiter.viev.GameScreen;
 
 public class Background  extends GameObject{
-    float speed = 300f;
+    float speed = 100f;
 
     public Background(Texture texture, float x, float y, float width, float heigth) {
         super(texture, x, y, width, heigth);
@@ -18,8 +18,8 @@ public class Background  extends GameObject{
         setPosition(bounds.getX(),bounds.getY()-speed* GameScreen.deltaCF);
         if(Gdx.input.isTouched())
             System.out.println(bounds.getY());
-        if (bounds.getY()<-7050f)
-            speed = 0f;
+        if (bounds.getY()<-7110f)
+            bounds.setPosition(bounds.getX(),7104);
     }
 
     @Override
