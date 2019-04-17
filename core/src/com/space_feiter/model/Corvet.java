@@ -18,17 +18,6 @@ public class Corvet  extends Ship{
     public float timeInv;
     private boolean alphaUp = false;
 
-
-
-    public Corvet(Texture texture, float x, float y, float width, float heigth) {
-        super(texture, x, y, width, heigth);
-        this.x = x;
-        this.y = y;
-
-        control = new ShipControl(bounds,this);
-
-    }
-
     public Corvet(Texture texture, float[] polygon, float x, float y, float width,float heigth){
         super(texture,new Polygon(polygon),x-1.5f,y-2f,width,heigth);
         this.x = x;
@@ -49,7 +38,8 @@ public class Corvet  extends Ship{
 
         bounds = new Polygon(MyJSonParseToPolygon.parseJsonToVertices(Gdx.files.internal("bom")));
         bounds.setPosition(posX, posY);
-        bounds.setOrigin(width/2f,heigth/2f);
+        bounds.setScale(1.5f,2f);
+        //bounds.setOrigin(width/2f,heigth/2f);
     }
     @Override
     public void draw(SpriteBatch batch) {
@@ -89,7 +79,7 @@ public class Corvet  extends Ship{
 
         bounds = new Polygon(MyJSonParseToPolygon.parseJsonToVertices(Gdx.files.internal("test")));
         bounds.setPosition(-0.5f, posY);
-        bounds.setOrigin(width/2f,heigth/2f);
+        bounds.setScale(width,width);
         control.setNewShip(true,bounds);
         control.setVulnerability(false);
     }

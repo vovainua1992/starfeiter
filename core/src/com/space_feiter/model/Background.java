@@ -16,8 +16,6 @@ public class Background  extends GameObject{
 
     private void handle(){
         setPosition(bounds.getX(),bounds.getY()-speed* GameScreen.deltaCF);
-        if(Gdx.input.isTouched())
-            System.out.println(bounds.getY());
         if (bounds.getY()<-7110f)
             bounds.setPosition(bounds.getX(),7104);
     }

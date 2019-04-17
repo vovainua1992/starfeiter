@@ -15,6 +15,10 @@ import java.util.ArrayList;
 public class MessengeMeneger implements Disposable {
   private static BitmapFont font;
   private static SpriteBatch batch;
+  private static OrthographicCamera camera;
+  private static float zoom = 0.7f;
+
+
 
   private   static ArrayList<Messeng> messes = new ArrayList<Messeng>();
   private static ArrayList<Messeng> deleteList = new ArrayList<Messeng>();
@@ -24,6 +28,18 @@ public class MessengeMeneger implements Disposable {
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.RED);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+    }
+
+    public static void resize(int screenWidth, int screenHeight) {
+        camera = new OrthographicCamera(screenWidth, screenHeight);
+        camera.zoom = zoom;
+
+        camera.translate(screenWidth / 2f*zoom, screenHeight / 2f*zoom);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+
     }
 
     public static void setPermissionMesenge(String mesenge, float numsFrameLive, float posX, float posY) {
@@ -36,8 +52,9 @@ public class MessengeMeneger implements Disposable {
     }
 
     private static void renderAll() {
+        batch.setProjectionMatrix(camera.combined);
         for (int i = messes.size(); i > 0; i--) {
-            font.draw(batch, messes.get(i - 1).getMess(), messes.get(i - 1).getX(), messes.get(i - 1).getY());
+            font.draw(batch, messes.get(i - 1).getMess(), messes.get(i - 1).getX()*zoom, messes.get(i - 1).getY()*zoom);
             messes.get(i - 1).handle();
             if (!messes.get(i - 1).need) {
                 deleteList.add(messes.get(i - 1));

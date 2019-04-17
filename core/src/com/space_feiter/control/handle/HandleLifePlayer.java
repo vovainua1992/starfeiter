@@ -7,6 +7,7 @@ import com.space_feiter.control.HandlerStatOfGame;
 import com.space_feiter.model.Corvet;
 import com.space_feiter.model.GameObject;
 import com.space_feiter.model.Life;
+import com.space_feiter.viev.GameScreen;
 
 import java.util.ArrayList;
 
@@ -16,12 +17,10 @@ public class HandleLifePlayer {
 
     public HandleLifePlayer(int startLife,int maxLife, Texture shipTexture){
         life = startLife;
-        float startPosX = -13f;
+        float startPosX = -((Gdx.graphics.getWidth()*HandlerStatOfGame.zoom/2f)+1f);
         for (int i = 0;i<maxLife;i++){
             startPosX =startPosX+1f;
-            //System.out.println(Gdx.graphics.getHeight());
-            float y = (float) 3f;
-            //System.out.println(y);
+            float y = (Gdx.graphics.getHeight()*HandlerStatOfGame.zoom/2f)-1.7f;
             Life life = new Life(shipTexture,startPosX, y,1f,1f/ HandlerStatOfGame.correlationShip);
             lifes.add(life);
 

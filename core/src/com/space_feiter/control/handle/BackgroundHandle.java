@@ -25,7 +25,6 @@ public class BackgroundHandle {
 
 
         one = new Background(texture,0,0f,Gdx.graphics.getWidth(),Gdx.graphics.getWidth()*4);
-        System.out.println(Gdx.graphics.getWidth()*4f);
         two = new Background(texture,0,Gdx.graphics.getWidth()*4f,Gdx.graphics.getWidth(),Gdx.graphics.getWidth()*4);
 
     }

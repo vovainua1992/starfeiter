@@ -9,25 +9,27 @@ import com.badlogic.gdx.math.Vector3;
 import com.space_feiter.control.HandlerStatOfGame;
 import com.space_feiter.control.MessengeMeneger;
 import com.space_feiter.control.handle.BackgroundHandle;
-import com.space_feiter.model.GameObject;
 
 
 public class GameScreen implements Screen {
     private SpriteBatch batch;
-    private OrthographicCamera camera ;
+    public static OrthographicCamera camera ;
 
     public static float deltaCF;
     private FrameRate frameRate;
     HandlerStatOfGame handlerStats;
     BackgroundHandle backgroundHandle;
+
+
+
     @Override
     public void show() {
         handlerStats = new HandlerStatOfGame();
-        handlerStats.startGame(this);
+        handlerStats.startGame();
         batch = new SpriteBatch();
         frameRate = new FrameRate();
         backgroundHandle =new BackgroundHandle();
-
+        Gdx.input.setInputProcessor(HandlerStatOfGame.controllPlayer.inputProcessor);
     }
 
     @Override
@@ -44,17 +46,13 @@ public class GameScreen implements Screen {
         backgroundHandle.draw();
         MessengeMeneger.render();
 
-        batch.begin();
         handlerStats.drawAll(batch);
         handlerStats.handleAll(delta,batch);
-        batch.end();
-
     }
 
     @Override
     public void resize(int width, int height) {
-        float aspectRatio = (float) height/width;
-        camera = new OrthographicCamera(20f,20f*aspectRatio);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.zoom = handlerStats.zoom;
         frameRate.resize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.position.set(new Vector3(0f,0f,10f));

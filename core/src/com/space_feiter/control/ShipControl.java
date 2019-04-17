@@ -27,15 +27,15 @@ public class ShipControl {
 
     public void handle(){
         if (needed){
-            if (HandlerStatOfGame.contolLeft){
+            if (ControllPlayer.contolLeft){
                 speed-=0.1f;
             }else
-            if(HandlerStatOfGame.controlRicht){
+            if(ControllPlayer.controlRicht){
                 speed+=0.1f;
             }else
                 dowmSpeed();
             if (vulnerability){
-                if (HandlerStatOfGame.controlFire)
+                if (ControllPlayer.controlFire)
                 if (!(rebootWeaponTime>0)){
                     shot();
                 }
@@ -62,6 +62,7 @@ public class ShipControl {
 
     public void setNewShip(boolean b,Polygon shipBounds){
         this.shipBounds = shipBounds;
+
         needed = b;
     }
 

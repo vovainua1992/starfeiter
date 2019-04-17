@@ -14,6 +14,7 @@ public class FrameRate implements Disposable {
     private BitmapFont font;
     private SpriteBatch batch;
     private OrthographicCamera cam;
+    private float zoom = 0.7f;
 
 
     public FrameRate() {
@@ -27,7 +28,9 @@ public class FrameRate implements Disposable {
 
     public void resize(int screenWidth, int screenHeight) {
         cam = new OrthographicCamera(screenWidth, screenHeight);
-        cam.translate(screenWidth / 2, screenHeight / 2);
+        cam.zoom = zoom;
+
+       cam.translate(screenWidth / 2f*zoom, screenHeight / 2f*zoom);
         cam.update();
         batch.setProjectionMatrix(cam.combined);
 
@@ -47,8 +50,10 @@ public class FrameRate implements Disposable {
 
     public void render() {
        // System.out.println(frameRate);
+        batch.setProjectionMatrix(cam.combined);
         batch.begin();
-        font.draw(batch, frameRate + " fps", 10, Gdx.graphics.getHeight() - 3);
+        //System.out.println(Gdx.graphics.getWidth());
+        font.draw(batch, frameRate + " fps",10f*zoom, (Gdx.graphics.getHeight()-3f)*zoom);
         batch.end();
     }
 

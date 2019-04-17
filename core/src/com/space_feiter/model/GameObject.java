@@ -1,11 +1,15 @@
 package com.space_feiter.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
+import com.space_feiter.util.MyJSonParseToPolygon;
 
 
 public abstract class GameObject {
@@ -13,14 +17,16 @@ public abstract class GameObject {
  Sprite object;
 
 
+
  public GameObject(Texture texture,Polygon polygon,float x, float y,float width,float heigth){
      object = new Sprite(texture);
      object.setSize(width,heigth);
      object.setOrigin(width/2f,heigth/2f);
 
-     bounds = polygon;
+     bounds = new Polygon(polygon.getVertices());
+     bounds.setOrigin(polygon.getOriginX(),polygon.getOriginY());
+     bounds.setScale(2f,1.5f);
      bounds.setPosition(x, y);
-     bounds.setOrigin(width/2f,heigth/2f);
  }
 
 
@@ -28,9 +34,8 @@ public abstract class GameObject {
     object = new Sprite(texture);
     object.setSize(width,heigth);
     object.setOrigin(width/2f,heigth/2f);
-
     bounds = new Polygon(new float[]{0f,0f,width,0f,width,heigth,0f,heigth});
-    bounds.setPosition(x+2f, y+2f);
+    bounds.setPosition(x, y);
     bounds.setOrigin(width/2f,heigth/2f);
  }
 
